@@ -1298,7 +1298,7 @@ const DATA = {
        nếu không có thì để ""
        ===================================================== */
 
-    qr:"BANDOKYUC://CH01-DINH-TAN-HUNG",
+    qr:"https://miale66.github.io/ban-do-ky-uc-chau-hung/#CH01",
 
     qrImage:"",
 
@@ -1409,7 +1409,7 @@ const DATA = {
 
     /* LỚP 4 */
 
-    qr:"BANDOKYUC://CH02-MO-HUYNH-VAN-THIEU",
+    qr:"https://miale66.github.io/ban-do-ky-uc-chau-hung/#CH02",
 
     qrImage:"",
 
@@ -1520,7 +1520,7 @@ const DATA = {
 
     /* LỚP 4 */
 
-    qr:"BANDOKYUC://CH03-HUYNH-TAN-PHAT",
+    qr:"https://miale66.github.io/ban-do-ky-uc-chau-hung/#CH03",
 
     qrImage:"",
 
@@ -2173,13 +2173,32 @@ document.querySelectorAll('.tab-btn').forEach(b=>{
 
 
 /* =========================================================
+   QR → MỞ ĐÚNG ĐỊA ĐIỂM
+   ========================================================= */
+
+function openFromQR(){
+
+  const id = window.location.hash.replace('#','').trim();
+
+  if(id && DATA[id]){
+
+    selectSite(id);
+
+  }
+
+}
+
+
+/* =========================================================
    KHỞI ĐỘNG
    ========================================================= */
 
 renderAll();
 
+openFromQR();
+
 </script>
 
 </body>
 </html>
-```
+,,,
