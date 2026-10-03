@@ -1,0 +1,2185 @@
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bản đồ ký ức Châu Hưng – Bình Đại</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+  :root{
+    --paper:#EAE1C6;
+    --paper-deep:#D9CB9F;
+    --paper-line:#c7b384;
+    --ink:#2E2416;
+    --ink-soft:#5B4E38;
+    --lacquer:#7B2027;
+    --lacquer-deep:#5A1519;
+    --gold:#B8892B;
+    --gold-soft:#DCC077;
+    --teal:#2F4A44;
+    --teal-deep:#1E322E;
+    --verified:#3F5C3A;
+    --unverified:#A25C1F;
+    --shadow: 0 18px 40px -18px rgba(30,20,10,0.45);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(184,137,43,0.10), transparent 55%),
+      radial-gradient(ellipse at 85% 100%, rgba(47,74,68,0.12), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Be Vietnam Pro', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--gold-soft); color:var(--ink); }
+  a{color:inherit;}
+  :focus-visible{ outline:3px solid var(--lacquer); outline-offset:2px; }
+
+  .paper-texture{
+    background-image:
+      repeating-linear-gradient(0deg, rgba(46,36,22,0.028) 0px, rgba(46,36,22,0.028) 1px, transparent 1px, transparent 3px);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:64px 6vw 40px;
+    overflow:hidden;
+    border-bottom:2px solid var(--paper-line);
+  }
+
+  .hero-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+
+  .hero-eyebrow::before{
+    content:"";
+    width:26px;
+    height:1px;
+    background:var(--teal);
+  }
+
+  .hero h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:clamp(40px, 7vw, 88px);
+    line-height:0.98;
+    margin:0 0 6px;
+    color:var(--lacquer-deep);
+    letter-spacing:.01em;
+  }
+
+  .hero h1 em{
+    color:var(--gold);
+    font-style:normal;
+  }
+
+  .hero p.lede{
+    max-width:620px;
+    font-size:17px;
+    line-height:1.7;
+    color:var(--ink-soft);
+    margin:18px 0 0;
+  }
+
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 28px;
+    margin-top:28px;
+    font-size:13px;
+    font-family:'JetBrains Mono', monospace;
+    color:var(--ink-soft);
+  }
+
+  .hero-meta span b{
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  .hero-map-mark{
+    position:absolute;
+    right:6vw;
+    top:40px;
+    width:210px;
+    height:210px;
+    opacity:.9;
+    pointer-events:none;
+  }
+
+  /* ---------- STAMP ROW ---------- */
+  .layers-strip{
+    padding:36px 6vw 44px;
+    border-bottom:2px solid var(--paper-line);
+  }
+
+  .layers-strip h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:26px;
+    font-weight:600;
+    margin:0 0 4px;
+    color:var(--teal-deep);
+  }
+
+  .layers-strip .sub{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+  }
+
+  .stamps{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:14px;
+  }
+
+  .stamp{
+    background:var(--paper);
+    border:1.5px dashed var(--paper-line);
+    border-radius:2px;
+    padding:14px 14px 16px;
+    position:relative;
+  }
+
+  .stamp::before,
+  .stamp::after{
+    content:"";
+    position:absolute;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--paper);
+    box-shadow: inset 0 0 0 1.5px var(--paper-line);
+    top:50%;
+    transform:translateY(-50%);
+  }
+
+  .stamp::before{ left:-5px; }
+  .stamp::after{ right:-5px; }
+
+  .stamp .num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    color:var(--gold);
+    font-weight:600;
+  }
+
+  .stamp .name{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:20px;
+    margin:4px 0 6px;
+    color:var(--ink);
+  }
+
+  .stamp .desc{
+    font-size:12.5px;
+    line-height:1.5;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- MAP SECTION ---------- */
+  .map-section{
+    padding:44px 6vw 80px;
+    display:grid;
+    grid-template-columns:minmax(0,1.15fr) minmax(320px,0.85fr);
+    gap:34px;
+    align-items:start;
+  }
+
+  .map-heading{
+    grid-column:1/-1;
+    margin-bottom:6px;
+  }
+
+  .map-heading h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:30px;
+    margin:0 0 4px;
+    color:var(--teal-deep);
+    font-weight:700;
+  }
+
+  .map-heading p{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:0;
+    max-width:560px;
+  }
+
+  .map-frame{
+    position:relative;
+    border:1.5px solid var(--paper-line);
+    border-radius:6px;
+    background:var(--paper);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    aspect-ratio:4 / 3.1;
+  }
+
+  .map-frame svg{
+    width:100%;
+    height:100%;
+    display:block;
+  }
+
+  .map-caption{
+    position:absolute;
+    left:16px;
+    bottom:14px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--teal-deep);
+    background:rgba(234,225,198,0.88);
+    padding:4px 9px;
+    border:1px solid var(--paper-line);
+    border-radius:3px;
+  }
+
+  .pin{
+    position:absolute;
+    transform:translate(-50%,-100%);
+    cursor:pointer;
+    background:none;
+    border:none;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .pin .dot{
+    width:22px;
+    height:22px;
+    border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg);
+    background:var(--lacquer);
+    border:2px solid var(--gold-soft);
+    box-shadow:0 6px 14px -4px rgba(90,21,25,0.55);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+
+  .pin .dot::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    margin:auto;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--gold-soft);
+  }
+
+  .pin .lbl{
+    margin-top:6px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    background:var(--teal-deep);
+    color:var(--paper);
+    padding:2px 7px;
+    border-radius:3px;
+    white-space:nowrap;
+  }
+
+  .pin:hover .dot,
+  .pin.active .dot{
+    transform:rotate(-45deg) scale(1.18);
+    box-shadow:0 8px 18px -4px rgba(90,21,25,0.7);
+  }
+
+  .pin.active .dot{
+    background:var(--gold);
+    border-color:var(--lacquer);
+  }
+
+  .pin-list{
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+
+  .pin-chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    border:1px solid var(--paper-line);
+    background:var(--paper);
+    padding:6px 10px;
+    border-radius:20px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    transition:all .15s ease;
+  }
+
+  .pin-chip.active{
+    background:var(--lacquer);
+    color:var(--paper);
+    border-color:var(--lacquer-deep);
+  }
+
+  /* ---------- DOSSIER ---------- */
+  .dossier{
+    position:relative;
+    display:flex;
+    min-height:520px;
+  }
+
+  .tabs{
+    display:flex;
+    flex-direction:column;
+    width:46px;
+    flex-shrink:0;
+    gap:6px;
+    padding-top:34px;
+  }
+
+  .tab-btn{
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    transform:rotate(180deg);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    padding:14px 8px;
+    border:1.5px solid var(--paper-line);
+    border-right:none;
+    background:var(--paper-deep);
+    color:var(--ink-soft);
+    cursor:pointer;
+    border-radius:6px 0 0 6px;
+    text-transform:uppercase;
+    transition:all .15s ease;
+  }
+
+  .tab-btn.active{
+    background:var(--paper);
+    color:var(--lacquer-deep);
+    font-weight:700;
+    box-shadow:-4px 0 10px -6px rgba(0,0,0,0.2) inset;
+  }
+
+  .tab-btn[data-tab="1"].active{ color:#3E5B54; }
+  .tab-btn[data-tab="2"].active{ color:var(--lacquer-deep); }
+  .tab-btn[data-tab="3"].active{ color:#8A6A1E; }
+  .tab-btn[data-tab="4"].active{ color:var(--teal-deep); }
+  .tab-btn[data-tab="5"].active{ color:#6B2E12; }
+
+  .folder{
+    flex:1;
+    background:var(--paper);
+    border:1.5px solid var(--paper-line);
+    border-radius:2px 8px 8px 8px;
+    box-shadow:var(--shadow);
+    padding:24px 26px 26px;
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+  }
+
+  .folder-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom:1.5px dashed var(--paper-line);
+    padding-bottom:14px;
+    margin-bottom:16px;
+  }
+
+  .folder-head .code{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--gold);
+    letter-spacing:.1em;
+  }
+
+  .folder-head h3{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:26px;
+    margin:2px 0 2px;
+    color:var(--ink);
+  }
+
+  .folder-head .period{
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+
+  .folder-head .status{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    border:1px solid var(--teal);
+    color:var(--teal);
+    padding:3px 8px;
+    border-radius:20px;
+    white-space:nowrap;
+    margin-top:2px;
+  }
+
+  .panel{
+    display:none;
+    flex:1;
+    min-height:0;
+    overflow:auto;
+  }
+
+  .panel.active{
+    display:block;
+    animation:fade .25s ease;
+  }
+
+  @keyframes fade{
+    from{opacity:0;transform:translateY(4px);}
+    to{opacity:1;transform:none;}
+  }
+
+  /* ---------- LAYER 1 ---------- */
+  .info-row{
+    display:flex;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid var(--paper-line);
+    font-size:13.5px;
+  }
+
+  .info-row .k{
+    width:130px;
+    flex-shrink:0;
+    color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    padding-top:2px;
+  }
+
+  .info-row .v{
+    color:var(--ink);
+    line-height:1.55;
+  }
+
+  /* ---------- LAYER 2 ---------- */
+  .fact{
+    display:flex;
+    gap:10px;
+    padding:10px 0;
+    border-bottom:1px solid var(--paper-line);
+    align-items:flex-start;
+  }
+
+  .fact:last-child{ border-bottom:none; }
+
+  .fact .tag{
+    flex-shrink:0;
+    margin-top:2px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    font-weight:600;
+    padding:2px 7px;
+    border-radius:3px;
+    white-space:nowrap;
+  }
+
+  .fact .tag.verified{
+    background:rgba(63,92,58,0.14);
+    color:var(--verified);
+    border:1px solid rgba(63,92,58,0.4);
+  }
+
+  .fact .tag.check{
+    background:rgba(162,92,31,0.14);
+    color:var(--unverified);
+    border:1px solid rgba(162,92,31,0.4);
+  }
+
+  .fact p{
+    margin:0;
+    font-size:14px;
+    line-height:1.62;
+    color:var(--ink);
+  }
+
+  .legend{
+    margin-top:14px;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  .legend i{
+    width:9px;
+    height:9px;
+    border-radius:2px;
+    display:inline-block;
+  }
+
+  /* ---------- LAYER 3 ---------- */
+  .materials{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .mat-card{
+    border:1px solid var(--paper-line);
+    border-radius:5px;
+    padding:12px;
+    background:var(--paper-deep);
+    font-size:12.5px;
+    overflow:hidden;
+  }
+
+  .mat-card .icon{
+    font-size:20px;
+    margin-bottom:6px;
+    display:block;
+  }
+
+  .mat-card b{
+    display:block;
+    font-size:13px;
+    margin-bottom:3px;
+    color:var(--ink);
+  }
+
+  .mat-card span{
+    color:var(--ink-soft);
+    line-height:1.5;
+    display:block;
+  }
+
+  .mat-image{
+    width:calc(100% + 24px);
+    height:170px;
+    object-fit:cover;
+    display:block;
+    margin:-12px -12px 10px;
+    background:var(--paper);
+    border-bottom:1px solid var(--paper-line);
+  }
+
+  .mat-image-placeholder{
+    width:calc(100% + 24px);
+    height:170px;
+    margin:-12px -12px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--paper);
+    border-bottom:1px solid var(--paper-line);
+    color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    text-align:center;
+    padding:10px;
+  }
+
+  .mat-card.has-image .icon{
+    display:none;
+  }
+
+  .mat-note{
+    margin-top:14px;
+    font-size:12px;
+    color:var(--ink-soft);
+    border-left:3px solid var(--gold);
+    padding:8px 12px;
+    background:rgba(184,137,43,0.08);
+  }
+
+  /* ---------- LAYER 4 QR ---------- */
+  .qr-wrap{
+    display:flex;
+    gap:22px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
+
+  .qr-box{
+    background:#fff;
+    padding:14px;
+    border:1.5px solid var(--paper-line);
+    border-radius:6px;
+    box-shadow:var(--shadow);
+    flex-shrink:0;
+    min-width:168px;
+    min-height:168px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .qr-box img{
+    display:block;
+    max-width:140px;
+    max-height:140px;
+    object-fit:contain;
+  }
+
+  .qr-info{
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.7;
+    max-width:280px;
+  }
+
+  .qr-info code{
+    display:inline-block;
+    margin-top:8px;
+    font-family:'JetBrains Mono', monospace;
+    background:var(--paper-deep);
+    padding:5px 8px;
+    border-radius:4px;
+    font-size:12px;
+    color:var(--ink);
+    border:1px solid var(--paper-line);
+    word-break:break-all;
+  }
+
+  .qr-note{
+    margin-top:10px;
+    font-size:11px;
+    color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  /* ---------- LAYER 5 ---------- */
+  .mission-task{
+    font-size:14.5px;
+    line-height:1.65;
+    color:var(--ink);
+    background:var(--paper-deep);
+    border-left:3px solid var(--lacquer);
+    padding:12px 14px;
+    border-radius:0 5px 5px 0;
+    margin-bottom:16px;
+  }
+
+  .mission-q{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    padding:8px 0;
+    border-bottom:1px dashed var(--paper-line);
+    font-size:13.5px;
+  }
+
+  .mission-q input[type=checkbox]{
+    margin-top:3px;
+    width:16px;
+    height:16px;
+    accent-color:var(--lacquer);
+    flex-shrink:0;
+    cursor:pointer;
+  }
+
+  .mission-note{
+    margin-top:16px;
+  }
+
+  .mission-note label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+
+  .mission-note textarea{
+    width:100%;
+    margin-top:6px;
+    min-height:80px;
+    resize:vertical;
+    border:1px solid var(--paper-line);
+    border-radius:5px;
+    padding:10px;
+    font-family:'Be Vietnam Pro', sans-serif;
+    font-size:13px;
+    background:#fff;
+    color:var(--ink);
+  }
+
+  .mission-progress{
+    margin-top:14px;
+    font-size:12px;
+    color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  .bar{
+    height:6px;
+    background:var(--paper-deep);
+    border-radius:4px;
+    overflow:hidden;
+    margin-top:5px;
+  }
+
+  .bar-fill{
+    height:100%;
+    background:var(--gold);
+    width:0%;
+    transition:width .3s ease;
+  }
+
+  footer{
+    padding:26px 6vw 40px;
+    text-align:center;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace;
+    border-top:2px solid var(--paper-line);
+  }
+
+  @media (max-width:880px){
+    .map-section{
+      grid-template-columns:1fr;
+    }
+
+    .stamps{
+      grid-template-columns:repeat(2,1fr);
+    }
+
+    .materials{
+      grid-template-columns:1fr;
+    }
+
+    .dossier{
+      flex-direction:column;
+    }
+
+    .tabs{
+      flex-direction:row;
+      width:auto;
+      padding-top:0;
+      overflow-x:auto;
+    }
+
+    .tab-btn{
+      writing-mode:horizontal-tb;
+      transform:none;
+      border:1.5px solid var(--paper-line);
+      border-radius:6px 6px 0 0;
+      padding:8px 12px;
+    }
+
+    .folder{
+      border-radius:0 8px 8px 8px;
+    }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{
+      animation:none !important;
+      transition:none !important;
+    }
+  }
+  .mat-video-preview {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+}
+
+.video-play-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  pointer-events: none;
+}
+
+.video-preview-wrap {
+  position: relative;
+}
+</style>
+</head>
+
+<body class="paper-texture">
+
+<section class="hero">
+  <div class="hero-eyebrow">Sản phẩm nghiên cứu KHKT — Khoa học xã hội &amp; hành vi</div>
+
+  <h1>Bản đồ<br><em>ký ức</em></h1>
+
+  <p class="lede">
+    Một công cụ học tập số, biến ba địa điểm quen thuộc ở Châu Hưng thành ba trạm nghiên cứu lịch sử — nơi học sinh không chỉ đọc thông tin, mà tự tay đối chiếu tư liệu, quét mã QR tại thực địa và hoàn thành nhiệm vụ kiểm chứng.
+  </p>
+
+  <div class="hero-meta">
+    <span>Địa bàn <b>Châu Hưng – Bình Đại, Bến Tre cũ</b></span>
+    <span>Trạm nghiên cứu <b>03</b></span>
+    <span>Lớp dữ liệu <b>05</b></span>
+    <span>Đối tượng <b>Học sinh THPT</b></span>
+  </div>
+</section>
+
+<section class="layers-strip">
+  <h2>Cấu trúc 5 lớp thông tin</h2>
+
+  <p class="sub">
+    Mỗi địa điểm trên bản đồ được tích hợp đồng thời 5 lớp dữ liệu — chạm vào một ghim trên bản đồ bên dưới để mở hồ sơ đầy đủ.
+  </p>
+
+  <div class="stamps">
+    <div class="stamp">
+      <div class="num">LỚP 01</div>
+      <div class="name">Bản đồ</div>
+      <div class="desc">Vị trí địa lý, khoảng cách và cách tiếp cận thực địa của di tích.</div>
+    </div>
+
+    <div class="stamp">
+      <div class="num">LỚP 02</div>
+      <div class="name">Hồ sơ lịch sử</div>
+      <div class="desc">Thông tin cô đọng, đã được dán nhãn mức độ kiểm chứng.</div>
+    </div>
+
+    <div class="stamp">
+      <div class="num">LỚP 03</div>
+      <div class="name">Tư liệu</div>
+      <div class="desc">Ảnh, văn bản, video, ghi âm phỏng vấn thu thập qua điền dã.</div>
+    </div>
+
+    <div class="stamp">
+      <div class="num">LỚP 04</div>
+      <div class="name">Mã QR</div>
+      <div class="desc">Mã quét nhanh gắn tại thực địa để truy cập hồ sơ ngay tại chỗ.</div>
+    </div>
+
+    <div class="stamp">
+      <div class="num">LỚP 05</div>
+      <div class="name">Nhiệm vụ học tập</div>
+      <div class="desc">Câu hỏi và bài tập yêu cầu học sinh tự tìm, đối chiếu nguồn.</div>
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+
+  <div class="map-heading">
+    <h2>Bản đồ điền dã</h2>
+    <p>
+      Ba trạm nghiên cứu trung tâm dọc theo cụm di tích Tân Hưng. Nhấn vào một ghim đỏ hoặc chọn tên trạm để mở hồ sơ.
+    </p>
+  </div>
+
+  <div>
+
+    <div class="map-frame" id="mapFrame">
+
+      <svg viewBox="0 0 400 310" preserveAspectRatio="xMidYMid slice">
+
+        <defs>
+          <pattern id="paddy" width="26" height="26" patternUnits="userSpaceOnUse">
+            <rect width="26" height="26" fill="#E3D8B4"/>
+            <path d="M0 26 L26 0" stroke="#D6C79A" stroke-width="1"/>
+          </pattern>
+        </defs>
+
+        <rect width="400" height="310" fill="#EAE1C6"/>
+
+        <rect x="18" y="18" width="364" height="274"
+              fill="url(#paddy)" opacity="0.55"/>
+
+        <path
+          d="M -10 60 C 60 40, 90 110, 160 100 C 230 90, 250 160, 330 150 C 380 144, 400 170, 420 165"
+          fill="none"
+          stroke="#6E8B84"
+          stroke-width="14"
+          stroke-linecap="round"
+          opacity="0.55"/>
+
+        <path
+          d="M -10 60 C 60 40, 90 110, 160 100 C 230 90, 250 160, 330 150 C 380 144, 400 170, 420 165"
+          fill="none"
+          stroke="#4C6B62"
+          stroke-width="2"
+          stroke-linecap="round"
+          opacity="0.5"
+          stroke-dasharray="1 7"/>
+
+        <path
+          d="M 40 300 C 90 230, 130 210, 150 165 C 175 115, 220 95, 280 70 C 320 52, 350 40, 390 30"
+          fill="none"
+          stroke="#B8892B"
+          stroke-width="3"
+          stroke-dasharray="9 7"
+          opacity="0.75"/>
+
+        <g opacity="0.5" fill="#C7B384">
+          <rect x="60" y="180" width="20" height="14"/>
+          <rect x="90" y="200" width="18" height="13"/>
+          <rect x="250" y="200" width="20" height="14"/>
+          <rect x="300" y="220" width="18" height="13"/>
+        </g>
+
+        <text
+          x="200"
+          y="20"
+          text-anchor="middle"
+          font-family="JetBrains Mono, monospace"
+          font-size="9"
+          fill="#5B4E38"
+          letter-spacing="2">
+          CHÂU HƯNG — BÌNH ĐẠI (MINH HỌA THỰC ĐỊA)
+        </text>
+
+      </svg>
+
+      <button class="pin" style="left:33%;top:38%;" data-id="ch01">
+        <span class="dot"></span>
+        <span class="lbl">CH01 · Đình Tân Hưng</span>
+      </button>
+
+      <button class="pin" style="left:47%;top:52%;" data-id="ch02">
+        <span class="dot"></span>
+        <span class="lbl">CH02 · Mộ Huỳnh Văn Thiệu</span>
+      </button>
+
+      <button class="pin" style="left:70%;top:32%;" data-id="ch03">
+        <span class="dot"></span>
+        <span class="lbl">CH03 · Huỳnh Tấn Phát</span>
+      </button>
+
+      <div class="map-caption">
+        Bản đồ minh họa — thay bằng nền bản đồ số thực khi triển khai
+      </div>
+
+    </div>
+
+    <div class="pin-list" id="pinList">
+
+      <button class="pin-chip active" data-id="ch01">
+        CH01 — Đình Tân Hưng
+      </button>
+
+      <button class="pin-chip" data-id="ch02">
+        CH02 — Mộ Huỳnh Văn Thiệu
+      </button>
+
+      <button class="pin-chip" data-id="ch03">
+        CH03 — Khu lưu niệm Huỳnh Tấn Phát
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="dossier">
+
+    <div class="tabs">
+
+      <button class="tab-btn active" data-tab="1">
+        Lớp 1 · Bản đồ
+      </button>
+
+      <button class="tab-btn" data-tab="2">
+        Lớp 2 · Hồ sơ
+      </button>
+
+      <button class="tab-btn" data-tab="3">
+        Lớp 3 · Tư liệu
+      </button>
+
+      <button class="tab-btn" data-tab="4">
+        Lớp 4 · QR
+      </button>
+
+      <button class="tab-btn" data-tab="5">
+        Lớp 5 · Nhiệm vụ
+      </button>
+
+    </div>
+
+    <div class="folder">
+
+      <div class="folder-head">
+
+        <div>
+
+          <div class="code" id="fCode">CH01</div>
+
+          <h3 id="fName">Đình Tân Hưng</h3>
+
+          <div class="period" id="fPeriod">
+            Di tích lịch sử – văn hóa cấp tỉnh
+          </div>
+
+        </div>
+
+        <div class="status" id="fStatus">
+          Đang tiếp tục điền dã
+        </div>
+
+      </div>
+
+      <!-- =========================
+           LỚP 1
+      ========================== -->
+
+      <div class="panel active" id="panel1">
+
+        <div class="info-row">
+          <div class="k">Vị trí</div>
+          <div class="v" id="p1-loc"></div>
+        </div>
+
+        <div class="info-row">
+          <div class="k">Khoảng cách</div>
+          <div class="v" id="p1-dist"></div>
+        </div>
+
+        <div class="info-row">
+          <div class="k">Cách tiếp cận</div>
+          <div class="v" id="p1-access"></div>
+        </div>
+
+        <div class="info-row">
+          <div class="k">Ghi chú thực địa</div>
+          <div class="v" id="p1-note"></div>
+        </div>
+
+      </div>
+
+      <!-- =========================
+           LỚP 2
+      ========================== -->
+
+      <div class="panel" id="panel2">
+
+        <div id="p2-facts"></div>
+
+        <div class="legend">
+
+          <span>
+            <i style="background:var(--verified)"></i>
+            Đã kiểm chứng
+          </span>
+
+          <span>
+            <i style="background:var(--unverified)"></i>
+            Cần tiếp tục xác minh
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- =========================
+           LỚP 3 — TƯ LIỆU
+      ========================== -->
+
+      <div class="panel" id="panel3">
+
+        <div class="materials" id="p3-materials"></div>
+
+        <div class="mat-note">
+          Nhóm nghiên cứu có thể bổ sung ảnh tư liệu, văn bản, video, ghi âm phỏng vấn
+          và các nguồn tư liệu khác trực tiếp vào từng thẻ sau mỗi đợt điền dã.
+        </div>
+
+      </div>
+
+      <!-- =========================
+           LỚP 4 — QR
+      ========================== -->
+
+      <div class="panel" id="panel4">
+
+        <div class="qr-wrap">
+
+          <div class="qr-box" id="qrBox"></div>
+
+          <div class="qr-info">
+
+            Mã QR gắn tại thực địa, dẫn thẳng đến hồ sơ số của điểm di tích này.
+            Học sinh quét mã ngay khi đứng trước di tích để mở đầy đủ 5 lớp thông tin trên điện thoại.
+
+            <br>
+
+            <code id="qrText"></code>
+
+            <div class="qr-note" id="qrNote"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- =========================
+           LỚP 5
+      ========================== -->
+
+      <div class="panel" id="panel5">
+
+        <div class="mission-task" id="p5-task"></div>
+
+        <div id="p5-questions"></div>
+
+        <div class="mission-note">
+
+          <label>Ghi chú câu trả lời của em</label>
+
+          <textarea placeholder="Ghi lại nguồn em tìm được, điểm giống và khác nhau giữa các nguồn..."></textarea>
+
+        </div>
+
+        <div class="mission-progress">
+          Tiến độ nhiệm vụ:
+          <span id="p5-progress">0/0</span>
+        </div>
+
+        <div class="bar">
+          <div class="bar-fill" id="p5-bar"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  BẢN ĐỒ KÝ ỨC CHÂU HƯNG – BÌNH ĐẠI ·
+  SẢN PHẨM NGHIÊN CỨU KHOA HỌC KỸ THUẬT ·
+  PHIÊN BẢN MẪU THỬ NGHIỆM
+</footer>
+
+
+<script>
+
+/* =========================================================
+   DỮ LIỆU CÁC ĐỊA ĐIỂM
+   ========================================================= */
+
+const DATA = {
+
+  /* =======================================================
+     CH01
+     ======================================================= */
+
+  ch01:{
+
+    code:"CH01",
+
+    name:"Đình Tân Hưng",
+
+    period:"Di tích lịch sử – văn hóa cấp tỉnh · QĐ 1698/QĐ-UB, 12/4/2001",
+
+    status:"Đã điền dã lần 1",
+
+    map:{
+
+      loc:"Ấp Tân Hưng, xã Châu Hưng, huyện Bình Đại, Bến Tre cũ.",
+
+      dist:"Cách trung tâm xã khoảng 2,5 km — đi được bằng xe máy hoặc xe đạp.",
+
+      access:"Đường liên ấp trải nhựa, có bảng chỉ dẫn di tích ở đầu lối rẽ.",
+
+      note:"Nên khảo sát vào buổi sáng, tránh giờ cúng để không ảnh hưởng sinh hoạt cộng đồng."
+
+    },
+
+    facts:[
+
+      {
+        v:true,
+        t:"Đình Tân Hưng được công nhận là di tích lịch sử – văn hóa cấp tỉnh về lưu niệm danh nhân theo Quyết định số 1698/QĐ-UB ngày 12/4/2001."
+      },
+
+      {
+        v:true,
+        t:"Đình gắn liền với nhân vật Huỳnh Văn Thiệu, người được nhân dân địa phương tôn làm Thành hoàng bổn cảnh."
+      },
+
+      {
+        v:false,
+        t:"Một số chi tiết về năm dựng đình và quy mô kiến trúc ban đầu hiện còn được kể theo nhiều dị bản, cần tiếp tục đối chiếu với tư liệu lưu trữ."
+      },
+
+      {
+        v:false,
+        t:"Câu chuyện dân gian về nguồn gốc tên gọi “Tân Hưng” cần được xác minh thêm qua các bậc cao niên trong làng."
+      }
+
+    ],
+
+    /* =====================================================
+       LỚP 3 — TƯ LIỆU
+
+       BÀ CHỈ CẦN THAY LINK Ở TRƯỜNG img
+
+       Ví dụ:
+       img:"https://ten-trang-web.com/anh.jpg"
+
+       Nếu chưa có ảnh:
+       img:""
+       ===================================================== */
+
+    materials:[
+
+      {
+        icon:"📷",
+        t:"Ảnh thực địa",
+        d:"Toàn cảnh mặt tiền đình, án thờ, sắc phong (nếu còn lưu).",
+        img:"images/anh1.jpg"
+      },
+
+      {
+        icon:"📄",
+        t:"Văn bản",
+        d:"Bản sao Quyết định công nhận di tích 1698/QĐ-UB.",
+        img:"images/anh2.png"
+      },
+
+      {
+        icon:"🎙️",
+        t:"Phỏng vấn",
+        d:"Ghi âm lời kể của Ban quản lý đình về lễ hội, tập tục thờ cúng.",
+        img:""
+      },
+
+      {
+        icon:"🎞️",
+        t:"Video",
+        d:"Clip ngắn ghi lại không gian đình trong ngày thường và ngày lễ.",
+        video:"images/video1.mp4"
+      }
+
+    ],
+
+    /* =====================================================
+       LỚP 4 — QR
+
+       qr = nội dung mà QR sẽ mã hóa
+
+       qrImage = nếu bà có ảnh QR riêng thì điền link ảnh
+       nếu không có thì để ""
+       ===================================================== */
+
+    qr:"BANDOKYUC://CH01-DINH-TAN-HUNG",
+
+    qrImage:"",
+
+    mission:{
+
+      task:"Tìm ít nhất hai nguồn nói về Huỳnh Văn Thiệu và xác định điểm giống nhau giữa các nguồn.",
+
+      qs:[
+
+        "Nguồn thứ nhất em tìm được là gì? (sách, báo, lời kể, văn bia...)",
+
+        "Nguồn thứ hai em tìm được là gì?",
+
+        "Hai nguồn có thống nhất với nhau về vai trò của Huỳnh Văn Thiệu không?",
+
+        "Còn chi tiết nào giữa hai nguồn chưa khớp nhau, cần tiếp tục xác minh?"
+
+      ]
+
+    }
+
+  },
+
+
+  /* =======================================================
+     CH02
+     ======================================================= */
+
+  ch02:{
+
+    code:"CH02",
+
+    name:"Mộ Huỳnh Văn Thiệu",
+
+    period:"Di tích lịch sử – văn hóa cấp tỉnh · cùng cụm với Đình Tân Hưng",
+
+    status:"Đã điền dã lần 1",
+
+    map:{
+
+      loc:"Khuôn viên gần Đình Tân Hưng, ấp Tân Hưng, xã Châu Hưng.",
+
+      dist:"Cách Đình Tân Hưng khoảng 150 m, đi bộ trong cùng cụm di tích.",
+
+      access:"Lối đi lát gạch trong khuôn viên đình, có bảng tên di tích.",
+
+      note:"Khảo sát cùng buổi với Đình Tân Hưng để tiết kiệm thời gian di chuyển."
+
+    },
+
+    facts:[
+
+      {
+        v:true,
+        t:"Mộ Huỳnh Văn Thiệu được công nhận cùng cụm di tích với Đình Tân Hưng theo Quyết định số 1698/QĐ-UB ngày 12/4/2001."
+      },
+
+      {
+        v:true,
+        t:"Theo tư liệu địa phương, Huỳnh Văn Thiệu gắn với quá trình khai phá, tập hợp cư dân tại Tân Hưng và tham gia hoạt động chống Pháp trong bối cảnh phong trào Trương Định."
+      },
+
+      {
+        v:false,
+        t:"Một số mốc thời gian cụ thể trong cuộc đời ông (năm sinh, năm mất chính xác) hiện còn cần đối chiếu thêm với gia phả dòng họ."
+      },
+
+      {
+        v:false,
+        t:"Chi tiết về quy mô lực lượng ông từng tập hợp trong phong trào chống Pháp vẫn chủ yếu dựa trên truyền kể, chưa có văn bản gốc xác nhận."
+      }
+
+    ],
+
+    /* LỚP 3 */
+
+    materials:[
+
+      {
+        icon:"📷",
+        t:"Ảnh thực địa",
+        d:"Toàn cảnh khu mộ, bia mộ, hoa văn trang trí.",
+        img:""
+      },
+
+      {
+        icon:"📄",
+        t:"Văn bản",
+        d:"Trích lục tư liệu địa phương về vai trò của nhân vật.",
+        img:""
+      },
+
+      {
+        icon:"🎙️",
+        t:"Phỏng vấn",
+        d:"Lời kể của người trông coi đình về nghi thức tưởng niệm hằng năm.",
+        img:""
+      },
+
+      {
+        icon:"🧾",
+        t:"Ghi chép điền dã",
+        d:"Phiếu khảo sát di tích do nhóm nghiên cứu lập (Phụ lục 4).",
+        img:""
+      }
+
+    ],
+
+    /* LỚP 4 */
+
+    qr:"BANDOKYUC://CH02-MO-HUYNH-VAN-THIEU",
+
+    qrImage:"",
+
+    mission:{
+
+      task:"Tìm hiểu những thông tin nào về nhân vật Huỳnh Văn Thiệu được các nguồn thống nhất với nhau.",
+
+      qs:[
+
+        "Chi tiết nào về Huỳnh Văn Thiệu được nhiều nguồn cùng xác nhận nhất?",
+
+        "Chi tiết nào chỉ xuất hiện ở một nguồn duy nhất?",
+
+        "Vì sao nhân dân địa phương lập đình và tôn ông làm Thành hoàng bổn cảnh?",
+
+        "Em nghĩ vì sao ký ức về ông vẫn được lưu giữ đến hôm nay?"
+
+      ]
+
+    }
+
+  },
+
+
+  /* =======================================================
+     CH03
+     ======================================================= */
+
+  ch03:{
+
+    code:"CH03",
+
+    name:"Khu lưu niệm Huỳnh Tấn Phát",
+
+    period:"Gắn với làng Tân Hưng — quê quán của kiến trúc sư Huỳnh Tấn Phát",
+
+    status:"Dự kiến điền dã đợt 2",
+
+    map:{
+
+      loc:"Làng Tân Hưng, nay thuộc xã Châu Hưng, huyện Bình Đại.",
+
+      dist:"Cách Đình Tân Hưng khoảng 1,2 km, cùng nằm trong cụm case study trung tâm.",
+
+      access:"Có thể kết hợp khảo sát trong cùng buổi điền dã với hai điểm CH01, CH02.",
+
+      note:"Nên liên hệ trước với gia đình/dòng họ hoặc chính quyền địa phương để được hỗ trợ tư liệu."
+
+    },
+
+    facts:[
+
+      {
+        v:true,
+        t:"Huỳnh Tấn Phát sinh năm 1913 tại làng Tân Hưng, sau này trở thành kiến trúc sư và nhà hoạt động cách mạng, nhân vật quan trọng trong lịch sử Việt Nam thế kỷ XX."
+      },
+
+      {
+        v:true,
+        t:"Các tư liệu chính thức xác nhận quê quán của ông tại làng Tân Hưng, nay thuộc xã Châu Hưng, huyện Bình Đại, Bến Tre cũ."
+      },
+
+      {
+        v:false,
+        t:"Mối quan hệ huyết thống cụ thể giữa Huỳnh Tấn Phát và Huỳnh Văn Thiệu (là hậu duệ trực hệ hay theo nhánh nào của dòng họ Huỳnh) cần tiếp tục xác minh qua gia phả."
+      },
+
+      {
+        v:false,
+        t:"Một số câu chuyện về thời thơ ấu của ông tại quê nhà hiện chủ yếu lưu truyền trong ký ức cộng đồng, chưa được văn bản hóa đầy đủ."
+      }
+
+    ],
+
+    /* LỚP 3 */
+
+    materials:[
+
+      {
+        icon:"📷",
+        t:"Ảnh tư liệu",
+        d:"Ảnh chân dung, ảnh khu lưu niệm (nếu có), ảnh không gian làng Tân Hưng.",
+        img:""
+      },
+
+      {
+        icon:"📄",
+        t:"Văn bản",
+        d:"Tài liệu kỷ niệm 110 năm ngày sinh Huỳnh Tấn Phát; tư liệu về quê quán.",
+        img:""
+      },
+
+      {
+        icon:"🎙️",
+        t:"Phỏng vấn",
+        d:"Lời kể của người cao tuổi trong dòng họ Huỳnh hoặc trong làng.",
+        img:""
+      },
+
+      {
+        icon:"🔗",
+        t:"Liên kết ngoài",
+        d:"Bài viết đã công bố trên báo, tài liệu xuất bản chính thống.",
+        img:""
+      }
+
+    ],
+
+    /* LỚP 4 */
+
+    qr:"BANDOKYUC://CH03-HUYNH-TAN-PHAT",
+
+    qrImage:"",
+
+    mission:{
+
+      task:"Tìm mối liên hệ giữa không gian quê hương Tân Hưng và quá trình hình thành nhân vật Huỳnh Tấn Phát.",
+
+      qs:[
+
+        "Điều gì trong không gian quê hương có thể giúp em hiểu hơn về một nhân vật lịch sử?",
+
+        "Huỳnh Tấn Phát có mối liên hệ như thế nào với Huỳnh Văn Thiệu theo tư liệu em tìm được?",
+
+        "Em tìm thấy “dòng chảy lịch sử” nào nối từ Đình Tân Hưng đến Huỳnh Tấn Phát?",
+
+        "Nếu giới thiệu nhân vật này cho bạn cùng lớp, em sẽ chọn kể chi tiết nào trước tiên?"
+
+      ]
+
+    }
+
+  }
+
+};
+
+
+/* =========================================================
+   BIẾN HỆ THỐNG
+   ========================================================= */
+
+let currentId = "ch01";
+let currentTab = "1";
+
+
+/* =========================================================
+   LỚP 1
+   ========================================================= */
+
+function renderMap(){
+
+  const d = DATA[currentId];
+
+  document.getElementById('p1-loc').textContent = d.map.loc;
+
+  document.getElementById('p1-dist').textContent = d.map.dist;
+
+  document.getElementById('p1-access').textContent = d.map.access;
+
+  document.getElementById('p1-note').textContent = d.map.note;
+
+}
+
+
+/* =========================================================
+   LỚP 2
+   ========================================================= */
+
+function renderFacts(){
+
+  const d = DATA[currentId];
+
+  const wrap = document.getElementById('p2-facts');
+
+  wrap.innerHTML = "";
+
+  d.facts.forEach(f=>{
+
+    const row = document.createElement('div');
+
+    row.className = 'fact';
+
+    row.innerHTML = `
+      <span class="tag ${f.v ? 'verified':'check'}">
+        ${f.v ? 'Đã kiểm chứng':'Cần xác minh'}
+      </span>
+
+      <p>${f.t}</p>
+    `;
+
+    wrap.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================================
+   LỚP 3 — TƯ LIỆU HÌNH ẢNH
+   ========================================================= */
+
+function renderMaterials(){
+  const d = DATA[currentId];
+  const wrap = document.getElementById('p3-materials');
+  wrap.innerHTML = "";
+
+  d.materials.forEach(m=>{
+    const card = document.createElement('div');
+
+    // ===== VIDEO =====
+    if(m.video && m.video.trim() !== ""){
+      card.className = 'mat-card has-video';
+
+      card.innerHTML = `
+        <div class="video-preview-wrap">
+          <video
+            class="mat-video-preview"
+            src="${m.video}"
+            preload="metadata"
+            playsinline
+          ></video>
+          <div class="video-play-icon">▶</div>
+        </div>
+
+        <span class="icon">${m.icon || "🎬"}</span>
+        <b>${m.t}</b>
+        <span>${m.d}</span>
+      `;
+
+      const preview = card.querySelector('.mat-video-preview');
+
+      preview.addEventListener('click', function(){
+        const viewer = document.createElement('div');
+
+        viewer.style.cssText = `
+          position:fixed;
+          inset:0;
+          z-index:99999;
+          background:rgba(0,0,0,0.88);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:25px;
+        `;
+
+        const video = document.createElement('video');
+
+        video.src = this.src;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+
+        video.style.cssText = `
+          width:auto;
+          height:auto;
+          max-width:90vw;
+          max-height:85vh;
+          object-fit:contain;
+          border-radius:8px;
+          box-shadow:0 10px 40px rgba(0,0,0,0.6);
+        `;
+
+        const close = document.createElement('div');
+
+        close.innerHTML = '&times;';
+
+        close.style.cssText = `
+          position:absolute;
+          top:15px;
+          right:25px;
+          color:white;
+          font-size:42px;
+          cursor:pointer;
+          line-height:1;
+          user-select:none;
+        `;
+
+        viewer.appendChild(video);
+        viewer.appendChild(close);
+        document.body.appendChild(viewer);
+
+        close.addEventListener('click', function(){
+          video.pause();
+          viewer.remove();
+        });
+
+        viewer.addEventListener('click', function(e){
+          if(e.target === viewer){
+            video.pause();
+            viewer.remove();
+          }
+        });
+
+        video.play().catch(()=>{});
+      });
+
+    // ===== ẢNH =====
+    }else if(m.img && m.img.trim() !== ""){
+      card.className = 'mat-card has-image';
+
+      card.innerHTML = `
+        <img
+          class="mat-image"
+          src="${m.img}"
+          alt="${m.t}"
+          loading="lazy"
+          style="cursor:zoom-in;"
+        >
+
+        <div class="mat-image-placeholder" style="display:none;">
+          Không thể tải ảnh tư liệu
+        </div>
+
+        <span class="icon">${m.icon || "📎"}</span>
+        <b>${m.t}</b>
+        <span>${m.d}</span>
+      `;
+
+      const img = card.querySelector('.mat-image');
+
+      img.addEventListener('click', function(){
+        const viewer = document.createElement('div');
+
+        viewer.style.cssText = `
+          position:fixed;
+          inset:0;
+          z-index:99999;
+          background:rgba(0,0,0,0.88);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:30px;
+          cursor:zoom-out;
+        `;
+
+        const bigImg = document.createElement('img');
+
+        bigImg.src = this.src;
+        bigImg.alt = this.alt;
+
+        bigImg.style.cssText = `
+          max-width:90vw;
+          max-height:90vh;
+          object-fit:contain;
+          border-radius:8px;
+          box-shadow:0 10px 40px rgba(0,0,0,0.6);
+        `;
+
+        const close = document.createElement('div');
+
+        close.innerHTML = '&times;';
+
+        close.style.cssText = `
+          position:absolute;
+          top:15px;
+          right:25px;
+          color:white;
+          font-size:42px;
+          cursor:pointer;
+        `;
+
+        viewer.appendChild(bigImg);
+        viewer.appendChild(close);
+        document.body.appendChild(viewer);
+
+        close.addEventListener('click', () => viewer.remove());
+
+        viewer.addEventListener('click', function(e){
+          if(e.target === viewer){
+            viewer.remove();
+          }
+        });
+      });
+
+    // ===== KHÔNG CÓ ẢNH / VIDEO =====
+    }else{
+      card.className = 'mat-card';
+
+      card.innerHTML = `
+        <span class="icon">${m.icon || "📎"}</span>
+        <b>${m.t}</b>
+        <span>${m.d}</span>
+      `;
+    }
+
+    wrap.appendChild(card);
+  });
+}
+
+
+/* =========================================================
+   LỚP 4 — QR
+   ========================================================= */
+
+function renderQR(){
+
+  const d = DATA[currentId];
+
+  const box = document.getElementById('qrBox');
+
+  const text = document.getElementById('qrText');
+
+  const note = document.getElementById('qrNote');
+
+  text.textContent = d.qr;
+
+  box.innerHTML = "";
+
+  note.textContent = "";
+
+
+  /*
+    TRƯỜNG HỢP 1:
+    qrImage có link
+    → dùng ảnh QR có sẵn.
+
+    TRƯỜNG HỢP 2:
+    qrImage để trống
+    → tự tạo QR từ trường qr.
+  */
+
+
+  if(d.qrImage && d.qrImage.trim() !== ""){
+
+    const img = document.createElement('img');
+
+    img.src = d.qrImage;
+
+    img.alt = "Mã QR " + d.code;
+
+    img.width = 140;
+
+    img.height = 140;
+
+    img.onerror = function(){
+
+      box.innerHTML = "";
+
+      generateQRCode(box,d.qr);
+
+      note.textContent = "Không tải được ảnh QR, hệ thống đã tạo QR tự động.";
+
+    };
+
+    box.appendChild(img);
+
+    note.textContent = "Đang sử dụng ảnh mã QR được cung cấp.";
+
+  }else{
+
+    generateQRCode(box,d.qr);
+
+    note.textContent = "Mã QR được tạo tự động từ nội dung phía trên.";
+
+  }
+
+}
+
+
+/* =========================================================
+   TẠO QR
+   ========================================================= */
+
+function generateQRCode(box,text){
+
+  if(window.QRCode){
+
+    try{
+
+      new QRCode(box,{
+
+        text:text,
+
+        width:140,
+
+        height:140,
+
+        colorDark:"#2E2416",
+
+        colorLight:"#ffffff"
+
+      });
+
+    }catch(e){
+
+      renderFallbackQR(box,text);
+
+    }
+
+  }else{
+
+    renderFallbackQR(box,text);
+
+  }
+
+}
+
+
+/* =========================================================
+   QR DỰ PHÒNG
+   ========================================================= */
+
+function renderFallbackQR(box,text){
+
+  let seed = 0;
+
+  for(let i=0;i<text.length;i++){
+
+    seed = (seed * 31 + text.charCodeAt(i)) >>> 0;
+
+  }
+
+  const size = 12;
+
+  const svgNS = "http://www.w3.org/2000/svg";
+
+  const svg = document.createElementNS(svgNS,"svg");
+
+  svg.setAttribute("viewBox",`0 0 ${size} ${size}`);
+
+  svg.setAttribute("width","140");
+
+  svg.setAttribute("height","140");
+
+  for(let y=0;y<size;y++){
+
+    for(let x=0;x<size;x++){
+
+      seed = (seed * 1103515245 + 12345) >>> 0;
+
+      if((seed >> 16) % 2 === 0){
+
+        const r = document.createElementNS(svgNS,"rect");
+
+        r.setAttribute("x",x);
+
+        r.setAttribute("y",y);
+
+        r.setAttribute("width",1);
+
+        r.setAttribute("height",1);
+
+        r.setAttribute("fill","#2E2416");
+
+        svg.appendChild(r);
+
+      }
+
+    }
+
+  }
+
+  box.appendChild(svg);
+
+}
+
+
+/* =========================================================
+   LỚP 5
+   ========================================================= */
+
+function renderMission(){
+
+  const d = DATA[currentId];
+
+  document.getElementById('p5-task').textContent =
+    "Hãy thử làm nhà nghiên cứu: " + d.mission.task;
+
+  const wrap = document.getElementById('p5-questions');
+
+  wrap.innerHTML = "";
+
+  d.mission.qs.forEach((q,i)=>{
+
+    const row = document.createElement('label');
+
+    row.className = 'mission-q';
+
+    row.innerHTML = `
+      <input type="checkbox" data-q="${i}">
+      <span>${q}</span>
+    `;
+
+    wrap.appendChild(row);
+
+  });
+
+  updateProgress();
+
+  wrap.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+
+    cb.addEventListener('change',updateProgress);
+
+  });
+
+}
+
+
+/* =========================================================
+   TIẾN ĐỘ
+   ========================================================= */
+
+function updateProgress(){
+
+  const boxes =
+    document.querySelectorAll('#p5-questions input[type=checkbox]');
+
+  const done =
+    document.querySelectorAll('#p5-questions input[type=checkbox]:checked').length;
+
+  document.getElementById('p5-progress').textContent =
+    `${done}/${boxes.length}`;
+
+  const pct =
+    boxes.length
+      ? (done / boxes.length * 100)
+      : 0;
+
+  document.getElementById('p5-bar').style.width =
+    pct + '%';
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+function renderHeader(){
+
+  const d = DATA[currentId];
+
+  document.getElementById('fCode').textContent =
+    d.code;
+
+  document.getElementById('fName').textContent =
+    d.name;
+
+  document.getElementById('fPeriod').textContent =
+    d.period;
+
+  document.getElementById('fStatus').textContent =
+    d.status;
+
+}
+
+
+/* =========================================================
+   RENDER TOÀN BỘ
+   ========================================================= */
+
+function renderAll(){
+
+  renderHeader();
+
+  renderMap();
+
+  renderFacts();
+
+  renderMaterials();
+
+  renderQR();
+
+  renderMission();
+
+}
+
+
+/* =========================================================
+   CHỌN ĐỊA ĐIỂM
+   ========================================================= */
+
+function selectSite(id){
+
+  currentId = id;
+
+  document.querySelectorAll('.pin').forEach(p=>{
+
+    p.classList.toggle(
+      'active',
+      p.dataset.id === id
+    );
+
+  });
+
+  document.querySelectorAll('.pin-chip').forEach(p=>{
+
+    p.classList.toggle(
+      'active',
+      p.dataset.id === id
+    );
+
+  });
+
+  renderAll();
+
+}
+
+
+/* =========================================================
+   CHỌN LỚP
+   ========================================================= */
+
+function selectTab(tab){
+
+  currentTab = tab;
+
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+
+    b.classList.toggle(
+      'active',
+      b.dataset.tab === tab
+    );
+
+  });
+
+  document.querySelectorAll('.panel').forEach(p=>{
+
+    p.classList.remove('active');
+
+  });
+
+  document.getElementById('panel'+tab)
+    .classList.add('active');
+
+}
+
+
+/* =========================================================
+   EVENT
+   ========================================================= */
+
+document.querySelectorAll('.pin').forEach(p=>{
+
+  p.addEventListener(
+    'click',
+    ()=>selectSite(p.dataset.id)
+  );
+
+});
+
+
+document.querySelectorAll('.pin-chip').forEach(p=>{
+
+  p.addEventListener(
+    'click',
+    ()=>selectSite(p.dataset.id)
+  );
+
+});
+
+
+document.querySelectorAll('.tab-btn').forEach(b=>{
+
+  b.addEventListener(
+    'click',
+    ()=>selectTab(b.dataset.tab)
+  );
+
+});
+
+
+/* =========================================================
+   KHỞI ĐỘNG
+   ========================================================= */
+
+renderAll();
+
+</script>
+
+</body>
+</html>
+```
