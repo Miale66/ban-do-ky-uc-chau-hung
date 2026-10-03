@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -980,7 +980,7 @@
       </button>
 
       <div class="map-caption">
-        Bản đồ minh họa — thay bằng nền bản đồ số thực khi triển khai
+        Bản đồ minh họa 
       </div>
 
     </div>
@@ -1145,38 +1145,26 @@
 
       </div>
 
-      <!-- =========================
-           LỚP 5
-      ========================== -->
+     <!-- LỚP 5
+========================== -->
 
-      <div class="panel" id="panel5">
+<div class="panel" id="panel5">
 
-        <div class="mission-task" id="p5-task"></div>
+  <div class="mission-task" id="p5-task"></div>
 
-        <div id="p5-questions"></div>
+  <div id="p5-questions"></div>
 
-        <div class="mission-note">
+ 
 
-          <label>Ghi chú câu trả lời của em</label>
-
-          <textarea placeholder="Ghi lại nguồn em tìm được, điểm giống và khác nhau giữa các nguồn..."></textarea>
-
-        </div>
-
-        <div class="mission-progress">
-          Tiến độ nhiệm vụ:
-          <span id="p5-progress">0/0</span>
-        </div>
-
-        <div class="bar">
-          <div class="bar-fill" id="p5-bar"></div>
-        </div>
-
-      </div>
-
-    </div>
-
+  <div class="bar">
+    <div class="bar-fill" id="p5-bar"></div>
   </div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
@@ -1274,16 +1262,16 @@ const DATA = {
       },
 
       {
-        icon:"🎙️",
-        t:"Phỏng vấn",
-        d:"Ghi âm lời kể của Ban quản lý đình về lễ hội, tập tục thờ cúng.",
-        img:""
+        icon:"🔎️",
+        t:"Những quy định cần tuân thủ",
+        d:"Bảng nội quy được treo ở gian nhà trung tâm.",
+        img:"images/anh8.jpg"
       },
 
       {
         icon:"🎞️",
         t:"Video",
-        d:"Clip ngắn ghi lại không gian đình trong ngày.",
+        d:"Clip ngắn ghi lại không gian đình trong ngày thường và ngày lễ.",
         video:"images/video1.mp4"
       }
 
@@ -1303,24 +1291,28 @@ const DATA = {
     qrImage:"",
 
     mission:{
-
-      task:"Tìm ít nhất hai nguồn nói về Huỳnh Văn Thiệu và xác định điểm giống nhau giữa các nguồn.",
-
-      qs:[
-
-        "Nguồn thứ nhất em tìm được là gì? (sách, báo, lời kể, văn bia...)",
-
-        "Nguồn thứ hai em tìm được là gì?",
-
-        "Hai nguồn có thống nhất với nhau về vai trò của Huỳnh Văn Thiệu không?",
-
-        "Còn chi tiết nào giữa hai nguồn chưa khớp nhau, cần tiếp tục xác minh?"
-
-      ]
-
+  task:"Kiểm tra nhanh kiến thức về Đình Tân Hưng.",
+  qs:[
+    {
+      text:"Đình Tân Hưng được công nhận là di tích lịch sử – văn hóa cấp tỉnh.",
+      answer:true
+    },
+    {
+      text:"Đình Tân Hưng gắn liền với nhân vật Huỳnh Văn Thiệu.",
+      answer:true
+    },
+    {
+      text:"Một số chi tiết về năm dựng đình vẫn cần tiếp tục đối chiếu với tư liệu.",
+      answer:true
+    },
+    {
+      text:"Câu chuyện dân gian về nguồn gốc tên gọi Tân Hưng đã được xác minh hoàn toàn.",
+      answer:false
     }
+  ]
+}
+},
 
-  },
 
 
   /* =======================================================
@@ -1381,28 +1373,28 @@ const DATA = {
         icon:"📷",
         t:"Ảnh thực địa",
         d:"Toàn cảnh khu mộ, bia mộ, hoa văn trang trí.",
-        img:""
+        img:"images/anh3.png"
       },
 
       {
         icon:"📄",
         t:"Văn bản",
-        d:"Trích lục tư liệu địa phương về vai trò của nhân vật.",
-        img:""
+        d:"Bản sao công nhận di tích cấp tỉnh",
+        img:"images/anh2.png"
       },
 
       {
-        icon:"🎙️",
-        t:"Phỏng vấn",
-        d:"Lời kể của người trông coi đình về nghi thức tưởng niệm hằng năm.",
-        img:""
+        icon:"🔗️",
+        t:"Liên kết ngoài",
+        d:"Câu chuyện truyền thống cách mạng dưới mái đình Tân Hưng",
+        link:"https://dongkhoi.baovinhlong.vn/cau-chuyen-truyen-thong-cach-mang-duoi-mai-dinh-tan-hung-08022023-a110914.html"
       },
 
       {
         icon:"🧾",
-        t:"Ghi chép điền dã",
-        d:"Phiếu khảo sát di tích do nhóm nghiên cứu lập (Phụ lục 4).",
-        img:""
+        t:"Ghi chép",
+        d:"Sau khi qua đời và trải qua các thời kỳ lịch sử, nhân dân quê nhà đã lập đền, rước di ảnh và tôn vinh ông làm 'Thành hoàng bổn cảnh' tại đình Tân Hưng. Ông cũng là ông cụ của Kiến trúc sư Huỳnh Tấn Phát.( Trích https://cand.vn/thanh-hoan-bon-canh-huynh-van-thieu-va-nguoi-chau-huynh-tan-phat-post529416.html)",
+        
       }
 
     ],
@@ -1413,23 +1405,27 @@ const DATA = {
 
     qrImage:"",
 
-    mission:{
-
-      task:"Tìm hiểu những thông tin nào về nhân vật Huỳnh Văn Thiệu được các nguồn thống nhất với nhau.",
-
-      qs:[
-
-        "Chi tiết nào về Huỳnh Văn Thiệu được nhiều nguồn cùng xác nhận nhất?",
-
-        "Chi tiết nào chỉ xuất hiện ở một nguồn duy nhất?",
-
-        "Vì sao nhân dân địa phương lập đình và tôn ông làm Thành hoàng bổn cảnh?",
-
-        "Em nghĩ vì sao ký ức về ông vẫn được lưu giữ đến hôm nay?"
-
-      ]
-
+   mission:{
+  task:"Kiểm tra nhanh kiến thức về cụ Huỳnh Văn Thiệu.",
+  qs:[
+    {
+      text:"Huỳnh Văn Thiệu gắn với quá trình khai phá và tập hợp cư dân tại Tân Hưng.",
+      answer:true
+    },
+    {
+      text:"Huỳnh Văn Thiệu có liên hệ với hoạt động chống Pháp trong bối cảnh phong trào Trương Định.",
+      answer:true
+    },
+    {
+      text:"Tất cả các mốc thời gian cụ thể trong cuộc đời Huỳnh Văn Thiệu hiện đã được xác minh bằng văn bản gốc.",
+      answer:false
+    },
+    {
+      text:"Một số thông tin về lực lượng mà Huỳnh Văn Thiệu từng tập hợp vẫn cần tiếp tục đối chiếu với nguồn tư liệu.",
+      answer:true
     }
+  ]
+}
 
   },
 
@@ -1452,11 +1448,11 @@ const DATA = {
 
       loc:"Làng Tân Hưng, nay thuộc xã Châu Hưng, huyện Bình Đại.",
 
-      dist:"Cách Đình Tân Hưng khoảng 1,2 km, cùng nằm trong cụm case study trung tâm.",
+      dist:"Nằm trong cụm đình Tân Hưng.",
 
-      access:"Có thể kết hợp khảo sát trong cùng buổi điền dã với hai điểm CH01, CH02.",
+      access:"Gian nhà bên phải, ngay phía trước là cây di sản Việt Nam-cây đa",
 
-      note:"Nên liên hệ trước với gia đình/dòng họ hoặc chính quyền địa phương để được hỗ trợ tư liệu."
+      note:"Nên liên hệ chính quyền địa phương để được hỗ trợ tư liệu hoặc phóng vấn người dân xung quanh."
 
     },
 
@@ -1491,29 +1487,29 @@ const DATA = {
       {
         icon:"📷",
         t:"Ảnh tư liệu",
-        d:"Ảnh chân dung, ảnh khu lưu niệm (nếu có), ảnh không gian làng Tân Hưng.",
-        img:""
+        d:"Ảnh khu lưu niệm của cụ Huỳnh Tấn Phát",
+        img:"images/anh11.jpg"
       },
 
       {
-        icon:"📄",
-        t:"Văn bản",
-        d:"Tài liệu kỷ niệm 110 năm ngày sinh Huỳnh Tấn Phát; tư liệu về quê quán.",
-        img:""
+        icon:"📷",
+        t:"Ảnh tư liệu",
+        d:"Ảnh cụ Huỳnh Tấn Phát chụp cùng gia đình",
+        img:"images/anh9.avif"
       },
 
       {
-        icon:"🎙️",
-        t:"Phỏng vấn",
-        d:"Lời kể của người cao tuổi trong dòng họ Huỳnh hoặc trong làng.",
-        img:""
+        icon:"📄️",
+        t:"Ý nghĩa của đền thờ cụ Huỳnh Tấn Phát",
+        d:" khi KTS Huỳnh Tấn Phát mất, dân làng Tân Hưng đã rước di ảnh ông về thờ bên cạnh đình Tân Hưng nhằm giáo dục cho thế hệ con cháu ra sức học tập và làm việc như lúc sinh thời ông làm. Qua đó thể hiện đạo lý uống nước nhớ nguồn, một nét đẹp của việc gìn giữ bản sắc văn hóa dân tộc, góp phần giáo dục lịch sử truyền thống yêu nước qua nhiều thế hệ.(Trích báo Trang thông tin điện tử UBND xã Châu Hưng).",
+       
       },
 
       {
         icon:"🔗",
         t:"Liên kết ngoài",
-        d:"Bài viết đã công bố trên báo, tài liệu xuất bản chính thống.",
-        img:""
+        d:"Tiểu sử cụ Huỳnh Tấn Phát",
+        link:"https://thcshuynhtanphat.hcm.edu.vn/gioi-thieu/tieu-su-cu-huynh-tan-phat/ctmb/12194/4621"
       }
 
     ],
@@ -1525,21 +1521,25 @@ const DATA = {
     qrImage:"",
 
     mission:{
-
-      task:"Tìm mối liên hệ giữa không gian quê hương Tân Hưng và quá trình hình thành nhân vật Huỳnh Tấn Phát.",
-
+      task:"Kiểm tra nhanh kiến thức về cụ Huỳnh Tấn Phát và quê hương Tân Hưng.",
       qs:[
-
-        "Điều gì trong không gian quê hương có thể giúp em hiểu hơn về một nhân vật lịch sử?",
-
-        "Huỳnh Tấn Phát có mối liên hệ như thế nào với Huỳnh Văn Thiệu theo tư liệu em tìm được?",
-
-        "Em tìm thấy “dòng chảy lịch sử” nào nối từ Đình Tân Hưng đến Huỳnh Tấn Phát?",
-
-        "Nếu giới thiệu nhân vật này cho bạn cùng lớp, em sẽ chọn kể chi tiết nào trước tiên?"
-
+        {
+          text:"Huỳnh Tấn Phát sinh năm 1913 tại làng Tân Hưng.",
+          answer:true
+        },
+        {
+          text:"Huỳnh Tấn Phát là kiến trúc sư và nhà hoạt động cách mạng, có vai trò quan trọng trong lịch sử Việt Nam thế kỷ XX.",
+          answer:true
+        },
+        {
+          text:"Các tư liệu chính thức xác nhận quê quán của Huỳnh Tấn Phát tại làng Tân Hưng, nay thuộc xã Châu Hưng.",
+          answer:true
+        },
+        {
+          text:"Mối quan hệ huyết thống cụ thể giữa Huỳnh Tấn Phát và Huỳnh Văn Thiệu hiện đã được xác minh đầy đủ qua gia phả.",
+          answer:false
+        }
       ]
-
     }
 
   }
@@ -1784,7 +1784,23 @@ function renderMaterials(){
         });
       });
 
-    // ===== KHÔNG CÓ ẢNH / VIDEO =====
+    // ===== LINK =====
+    }else if(m.link && m.link.trim() !== ""){
+
+      card.className = 'mat-card';
+      card.style.cursor = 'pointer';
+
+      card.innerHTML = `
+        <span class="icon">${m.icon || "🔗"}</span>
+        <b>${m.t}</b>
+        <span>${m.d}</span>
+      `;
+
+      card.addEventListener('click', function(){
+        window.open(m.link, '_blank');
+      });
+
+// ===== KHÔNG CÓ ẢNH / VIDEO / LINK =====
     }else{
       card.className = 'mat-card';
 
@@ -1984,26 +2000,137 @@ function renderMission(){
 
   d.mission.qs.forEach((q,i)=>{
 
-    const row = document.createElement('label');
+    const row = document.createElement('div');
 
     row.className = 'mission-q';
 
     row.innerHTML = `
-      <input type="checkbox" data-q="${i}">
-      <span>${q}</span>
+      <div class="quiz-question">
+        <span class="quiz-number">${i + 1}</span>
+        <span>${q.text}</span>
+      </div>
+
+      <div class="quiz-options">
+        <label>
+          <input
+            type="radio"
+            name="quiz-${currentId}-${i}"
+            value="true"
+          >
+          <span>Đúng</span>
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="quiz-${currentId}-${i}"
+            value="false"
+          >
+          <span>Sai</span>
+        </label>
+      </div>
+
+      <div class="quiz-result"></div>
     `;
 
     wrap.appendChild(row);
 
   });
 
-  updateProgress();
+  // ===== NÚT KIỂM TRA =====
 
-  wrap.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+  const button = document.createElement('button');
 
-    cb.addEventListener('change',updateProgress);
+  button.className = 'quiz-check-btn';
+
+  button.textContent = '✓ KIỂM TRA KẾT QUẢ';
+
+  button.addEventListener('click',function(){
+
+    let score = 0;
+    let answered = 0;
+
+    const rows = wrap.querySelectorAll('.mission-q');
+
+    rows.forEach((row,i)=>{
+
+      const selected = row.querySelector(
+        `input[name="quiz-${currentId}-${i}"]:checked`
+      );
+
+      const result = row.querySelector('.quiz-result');
+
+      if(!selected){
+
+        result.textContent = "⚠️ Chưa chọn đáp án";
+        result.className = "quiz-result unanswered";
+
+        return;
+      }
+
+      answered++;
+
+      const userAnswer = selected.value === "true";
+      const correctAnswer = d.mission.qs[i].answer;
+
+      if(userAnswer === correctAnswer){
+
+        score++;
+
+        result.textContent = "✓ Chính xác";
+        result.className = "quiz-result correct";
+
+      }else{
+
+        result.textContent =
+          "✗ Chưa chính xác — đáp án đúng: " +
+          (correctAnswer ? "Đúng" : "Sai");
+
+        result.className = "quiz-result wrong";
+
+      }
+
+    });
+
+    let oldScore = wrap.querySelector('.quiz-score');
+
+    if(oldScore){
+      oldScore.remove();
+    }
+
+    const scoreBox = document.createElement('div');
+
+    scoreBox.className = 'quiz-score';
+
+    if(answered < d.mission.qs.length){
+
+      scoreBox.innerHTML = `
+        <b>📝 Chưa hoàn thành</b>
+        <span>
+          Bà đã trả lời ${answered}/${d.mission.qs.length} câu
+        </span>
+      `;
+
+    }else{
+
+      scoreBox.innerHTML = `
+        <b>🎯 Kết quả: ${score}/${d.mission.qs.length}</b>
+        <span>
+          ${
+            score === d.mission.qs.length
+              ? "✓ Hoàn thành tất cả câu hỏi!"
+              : "Hãy xem lại những câu chưa chính xác."
+          }
+        </span>
+      `;
+
+    }
+
+    wrap.appendChild(scoreBox);
 
   });
+
+  wrap.appendChild(button);
 
 }
 
@@ -2204,4 +2331,4 @@ openFromQR();
 
 </body>
 </html>
-
+,,,
