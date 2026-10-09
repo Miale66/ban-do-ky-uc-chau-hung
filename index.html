@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -1148,16 +1148,27 @@
      <!-- LỚP 5
 ========================== -->
 
+
 <div class="panel" id="panel5">
 
-  <div class="mission-task" id="p5-task"></div>
+  <div class="mission-task">
+    <h3>Góc tương tác – Bản đồ ký ức</h3>
+    <p>
+      Hãy hoàn thành biểu mẫu để chia sẻ ý kiến
+      và kiểm tra kiến thức của em về cụm di tích.
+    </p>
+  </div>
 
-  <div id="p5-questions"></div>
-
- 
-
-  <div class="bar">
-    <div class="bar-fill" id="p5-bar"></div>
+  <div style="width:100%; max-width:100%; overflow:hidden;">
+    <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfrZvZnD3BGvXp54CJ9ELi28Ucb6t7_ZhcbwB_mUaQfbrhXpw/viewform?embedded=true"
+      style="display:block; width:100%; max-width:100%; height:1916px; border:0;"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      title="Biểu mẫu khảo sát Bản đồ ký ức">
+      Đang tải…
+    </iframe>
   </div>
 
 </div>
@@ -1987,152 +1998,7 @@ function renderFallbackQR(box,text){
    LỚP 5
    ========================================================= */
 
-function renderMission(){
 
-  const d = DATA[currentId];
-
-  document.getElementById('p5-task').textContent =
-    "Hãy thử làm nhà nghiên cứu: " + d.mission.task;
-
-  const wrap = document.getElementById('p5-questions');
-
-  wrap.innerHTML = "";
-
-  d.mission.qs.forEach((q,i)=>{
-
-    const row = document.createElement('div');
-
-    row.className = 'mission-q';
-
-    row.innerHTML = `
-      <div class="quiz-question">
-        <span class="quiz-number">${i + 1}</span>
-        <span>${q.text}</span>
-      </div>
-
-      <div class="quiz-options">
-        <label>
-          <input
-            type="radio"
-            name="quiz-${currentId}-${i}"
-            value="true"
-          >
-          <span>Đúng</span>
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            name="quiz-${currentId}-${i}"
-            value="false"
-          >
-          <span>Sai</span>
-        </label>
-      </div>
-
-      <div class="quiz-result"></div>
-    `;
-
-    wrap.appendChild(row);
-
-  });
-
-  // ===== NÚT KIỂM TRA =====
-
-  const button = document.createElement('button');
-
-  button.className = 'quiz-check-btn';
-
-  button.textContent = '✓ KIỂM TRA KẾT QUẢ';
-
-  button.addEventListener('click',function(){
-
-    let score = 0;
-    let answered = 0;
-
-    const rows = wrap.querySelectorAll('.mission-q');
-
-    rows.forEach((row,i)=>{
-
-      const selected = row.querySelector(
-        `input[name="quiz-${currentId}-${i}"]:checked`
-      );
-
-      const result = row.querySelector('.quiz-result');
-
-      if(!selected){
-
-        result.textContent = "⚠️ Chưa chọn đáp án";
-        result.className = "quiz-result unanswered";
-
-        return;
-      }
-
-      answered++;
-
-      const userAnswer = selected.value === "true";
-      const correctAnswer = d.mission.qs[i].answer;
-
-      if(userAnswer === correctAnswer){
-
-        score++;
-
-        result.textContent = "✓ Chính xác";
-        result.className = "quiz-result correct";
-
-      }else{
-
-        result.textContent =
-          "✗ Chưa chính xác — đáp án đúng: " +
-          (correctAnswer ? "Đúng" : "Sai");
-
-        result.className = "quiz-result wrong";
-
-      }
-
-    });
-
-    let oldScore = wrap.querySelector('.quiz-score');
-
-    if(oldScore){
-      oldScore.remove();
-    }
-
-    const scoreBox = document.createElement('div');
-
-    scoreBox.className = 'quiz-score';
-
-    if(answered < d.mission.qs.length){
-
-      scoreBox.innerHTML = `
-        <b>📝 Chưa hoàn thành</b>
-        <span>
-          Bà đã trả lời ${answered}/${d.mission.qs.length} câu
-        </span>
-      `;
-
-    }else{
-
-      scoreBox.innerHTML = `
-        <b>🎯 Kết quả: ${score}/${d.mission.qs.length}</b>
-        <span>
-          ${
-            score === d.mission.qs.length
-              ? "✓ Hoàn thành tất cả câu hỏi!"
-              : "Hãy xem lại những câu chưa chính xác."
-          }
-        </span>
-      `;
-
-    }
-
-    wrap.appendChild(scoreBox);
-
-  });
-
-  wrap.appendChild(button);
-
-}
 
 
 /* =========================================================
@@ -2331,3 +2197,4 @@ openFromQR();
 
 </body>
 </html>
+,,,
